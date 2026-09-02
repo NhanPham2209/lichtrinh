@@ -30,19 +30,36 @@ function initNavbar() {
         icon.classList.toggle('fa-xmark');
       }
     });
+  }
 
-    // Close menu when clicking link
-    navItems.forEach(item => {
-      item.addEventListener('click', () => {
-        navLinks.classList.remove('active');
-        const icon = mobileMenuBtn.querySelector('i');
-        if (icon) {
-          icon.classList.add('fa-bars');
-          icon.classList.remove('fa-xmark');
+  // Handle click on nav items
+  navItems.forEach(item => {
+    item.addEventListener('click', () => {
+      if (navLinks) navLinks.classList.remove('active');
+      const icon = mobileMenuBtn ? mobileMenuBtn.querySelector('i') : null;
+      if (icon) {
+        icon.classList.add('fa-bars');
+        icon.classList.remove('fa-xmark');
+      }
+
+      // If user clicks on "Lịch Trình 7N6Đ", automatically show all days
+      const href = item.getAttribute('href');
+      if (href === '#lich-trinh' && typeof window.switchDayTab === 'function') {
+        window.switchDayTab('all');
+      }
+    });
+  });
+
+  // Also handle any other anchor links targeting #lich-trinh across the page
+  document.querySelectorAll('a[href="#lich-trinh"]').forEach(link => {
+    if (!link.classList.contains('nav-item')) {
+      link.addEventListener('click', () => {
+        if (typeof window.switchDayTab === 'function') {
+          window.switchDayTab('all');
         }
       });
-    });
-  }
+    }
+  });
 
   // Scroll Spy
   window.addEventListener('scroll', () => {

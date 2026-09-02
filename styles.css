@@ -737,7 +737,7 @@ button {
 }
 
 /* ==========================================================================
-   ITINERARY TIMELINE (7 DAYS)
+   ITINERARY TIMELINE (7 DAYS) & FILTER TABS
    ========================================================================== */
 .itinerary-nav-pills {
   display: flex;
@@ -745,46 +745,86 @@ button {
   justify-content: center;
   gap: 0.5rem;
   flex-wrap: wrap;
-  margin-bottom: 3rem;
-  background: #ffffff;
-  padding: 0.6rem;
+  margin: 0 auto 3rem;
+  max-width: 1100px;
+  background: rgba(255, 255, 255, 0.94);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  padding: 0.65rem 0.85rem;
   border-radius: var(--radius-full);
-  border: 1px solid var(--border-subtle);
-  box-shadow: var(--shadow-sm);
+  border: 1px solid rgba(226, 232, 240, 0.9);
+  box-shadow: 0 8px 24px rgba(15, 23, 42, 0.06);
+  position: sticky;
+  top: 75px;
+  z-index: 95;
+  transition: var(--transition-smooth);
 }
 
 .it-filter-btn {
-  padding: 0.6rem 1.1rem;
+  padding: 0.55rem 1rem;
   border-radius: var(--radius-full);
   font-size: 0.82rem;
   font-weight: 700;
   color: var(--text-muted);
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
   display: flex;
   flex-direction: column;
   align-items: center;
-  line-height: 1.2;
-  transition: var(--transition-smooth);
+  line-height: 1.25;
+  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+  cursor: pointer;
+  white-space: nowrap;
 }
 
 .it-filter-btn .d-tag {
-  font-size: 0.88rem;
+  font-size: 0.86rem;
+  font-weight: 800;
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
 }
 
 .it-filter-btn .d-name {
   font-size: 0.7rem;
   font-weight: 500;
   opacity: 0.85;
+  margin-top: 1px;
 }
 
 .it-filter-btn:hover {
-  background: #f1f5f9;
-  color: var(--text-dark);
+  background: #ffffff;
+  color: var(--primary);
+  border-color: var(--primary);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(2, 132, 199, 0.15);
 }
 
 .it-filter-btn.active {
   background: linear-gradient(135deg, #0284c7, #0369a1);
-  color: #ffffff;
-  box-shadow: 0 4px 12px rgba(2, 132, 199, 0.3);
+  color: #ffffff !important;
+  border-color: transparent;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(2, 132, 199, 0.35);
+}
+
+.it-filter-btn.active .d-name {
+  opacity: 0.95;
+  color: #e0f2fe;
+}
+
+@media (max-width: 992px) {
+  .itinerary-nav-pills {
+    justify-content: flex-start;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    padding: 0.6rem;
+    border-radius: var(--radius-md);
+    scrollbar-width: thin;
+  }
+  .it-filter-btn {
+    flex-shrink: 0;
+  }
 }
 
 /* Day Block Structure */
